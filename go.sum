@@ -1,0 +1,10 @@
+github.com/go-chi/chi v1.5.5 h1:vOB/HbEMt9QqBqErz07QehcOKHaWFtuj87tTDVz2qXE=
+github.com/go-chi/chi v1.5.5/go.mod h1:C9JqLr3tIYjDOZpzn+BCuxY8z8vmca43EeMgyZt7irw=
+github.com/lib/pq v1.10.9 h1:YXG7RB+JIjhP29X+OtkiDnYaXQwpS4JEWq7dtCCRUEw=
+github.com/lib/pq v1.10.9/go.mod h1:AlVN5x4E4T544tWzH6hKfbfQvm3HdbOxrmggDNAPY9o=
+github.com/vinibgoulart/zius v0.1.0 h1:W2TtYFZPU8l7+evDz/mHPJ9VKBzuJD5zJ/SSYRJV3is=
+github.com/vinibgoulart/zius v0.1.0/go.mod h1:ylZWs9qCSL6KMJTknV9Yr92FiryKP6kpX+OcKRtJYq0=
+github.com/vinibgoulart/zius v0.1.1 h1:zQ/e3B0urzbPG2+JFHsp8RaSQ08VtSIdxN9UuY/WqrQ=
+github.com/vinibgoulart/zius v0.1.1/go.mod h1:ylZWs9qCSL6KMJTknV9Yr92FiryKP6kpX+OcKRtJYq0=
+github.com/vinibgoulart/zius v0.1.2 h1:QpKLKVnjaC9dSS7hG+BucpkximMWSA8ysZT0viBVRgc=
+github.com/vinibgoulart/zius v0.1.2/go.mod h1:ylZWs9qCSL6KMJTknV9Yr92FiryKP6kpX+OcKRtJYq0=

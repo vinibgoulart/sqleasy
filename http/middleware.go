@@ -1,7 +1,6 @@
 package http
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/vinibgoulart/sqleasy/helpers"
@@ -23,7 +22,6 @@ func DbContextMiddleware(state *server.ServerState) func(next http.Handler) http
 				return
 			}
 
-			fmt.Println(state.Db)
 			errPing := state.Db.Ping()
 
 			if errPing != nil {

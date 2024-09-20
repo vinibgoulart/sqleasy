@@ -7,6 +7,7 @@ import (
 	"sync"
 	"syscall"
 
+	_ "github.com/joho/godotenv/autoload"
 	"github.com/vinibgoulart/sqleasy/http"
 )
 

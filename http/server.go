@@ -10,6 +10,7 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/vinibgoulart/sqleasy/helpers"
+	aiHandlers "github.com/vinibgoulart/sqleasy/packages/ai/handlers"
 	databasesHandlers "github.com/vinibgoulart/sqleasy/packages/databases/handlers"
 	"github.com/vinibgoulart/sqleasy/packages/server"
 )
@@ -38,6 +39,11 @@ func ServerInit(ctx context.Context, waitGroup *sync.WaitGroup) {
 		r.Use(DbContextMiddleware(&state))
 		r.Get("/info", databasesHandlers.DatabaseConnectInfoGet(&state))
 		r.Get("/describe", databasesHandlers.DatabaseConnectDescribeGet(&state))
+	})
+
+	router.Route("/ai", func(r chi.Router) {
+		r.Use(DbContextMiddleware(&state))
+		r.Post("/prompt", aiHandlers.AiPromptPost(&state))
 	})
 
 	server := &http.Server{

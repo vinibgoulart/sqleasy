@@ -10,8 +10,8 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/vinibgoulart/sqleasy/helpers"
-	aiHandlers "github.com/vinibgoulart/sqleasy/packages/ai/handlers"
-	databasesHandlers "github.com/vinibgoulart/sqleasy/packages/databases/handlers"
+	aiHandlers "github.com/vinibgoulart/sqleasy/packages/ai/handlers/api"
+	databasesHandlers "github.com/vinibgoulart/sqleasy/packages/databases/handlers/api"
 	"github.com/vinibgoulart/sqleasy/packages/server"
 )
 

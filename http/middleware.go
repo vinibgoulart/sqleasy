@@ -1,6 +1,7 @@
 package http
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/vinibgoulart/sqleasy/helpers"
@@ -19,6 +20,14 @@ func DbContextMiddleware(state *server.ServerState) func(next http.Handler) http
 		return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 			if state.Db == nil {
 				helpers.ErrorResponse("Database not found, connect in POST /connect-database", http.StatusBadRequest, res)
+				return
+			}
+
+			fmt.Println(state.Db)
+			errPing := state.Db.Ping()
+
+			if errPing != nil {
+				helpers.ErrorResponse("Database ping not working, check your connection", http.StatusBadRequest, res)
 				return
 			}
 

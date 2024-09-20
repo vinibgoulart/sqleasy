@@ -43,6 +43,10 @@ func databaseConnectPostgres(databaseConnect *DatabaseConnect) (*sql.DB, *helper
 	dataSourceName := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", databaseConnect.Host, databaseConnect.Port, databaseConnect.Username, databaseConnect.Password, databaseConnect.Database)
 
 	db, err := sql.Open(Postgres, dataSourceName)
+	errPing := db.Ping()
+	if errPing != nil {
+		return nil, helpers.ErrorCreate(errPing.Error())
+	}
 
 	if err != nil {
 		return nil, helpers.ErrorCreate(err.Error())

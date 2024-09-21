@@ -1,6 +1,8 @@
+github.com/chzyer/logex v1.1.10 h1:Swpa1K6QvQznwJRcfTfQJmTE72DqScAa40E+fbHEXEE=
 github.com/chzyer/logex v1.1.10/go.mod h1:+Ywpsq7O8HXn0nuIou7OrIPyXbp3wmkHB+jjWRnGsAI=
 github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e h1:fY5BOSpyZCqRo5OhCuC+XN+r/bBCmeuuJtjz+bCNIf8=
 github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e/go.mod h1:nSuG5e5PlCu98SY8svDHJxuZscDgtXS6KTTbou5AhLI=
+github.com/chzyer/test v0.0.0-20180213035817-a1ea475d72b1 h1:q763qf9huN11kDQavWsoZXJNW3xEE4JJyHa5Q25/sd8=
 github.com/chzyer/test v0.0.0-20180213035817-a1ea475d72b1/go.mod h1:Q3SI9o4m/ZMnBNeIyt5eFwwo7qiLfzFZmjNmxjkiQlU=
 github.com/go-chi/chi v1.5.5 h1:vOB/HbEMt9QqBqErz07QehcOKHaWFtuj87tTDVz2qXE=
 github.com/go-chi/chi v1.5.5/go.mod h1:C9JqLr3tIYjDOZpzn+BCuxY8z8vmca43EeMgyZt7irw=
@@ -12,10 +14,6 @@ github.com/manifoldco/promptui v0.9.0 h1:3V4HzJk1TtXW1MTZMP7mdlwbBpIinw3HztaIlYt
 github.com/manifoldco/promptui v0.9.0/go.mod h1:ka04sppxSGFAtxX0qhlYQjISsg9mR4GWtQEhdbn6Pgg=
 github.com/sashabaranov/go-openai v1.30.1 h1:quZp0ROegVYm4HbczGi82ZzfWls/yE39nzXxlOMgtIo=
 github.com/sashabaranov/go-openai v1.30.1/go.mod h1:lj5b/K+zjTSFxVLijLSTDZuP7adOgerWeFyZLUhAKRg=
-github.com/vinibgoulart/zius v0.1.0 h1:W2TtYFZPU8l7+evDz/mHPJ9VKBzuJD5zJ/SSYRJV3is=
-github.com/vinibgoulart/zius v0.1.0/go.mod h1:ylZWs9qCSL6KMJTknV9Yr92FiryKP6kpX+OcKRtJYq0=
-github.com/vinibgoulart/zius v0.1.1 h1:zQ/e3B0urzbPG2+JFHsp8RaSQ08VtSIdxN9UuY/WqrQ=
-github.com/vinibgoulart/zius v0.1.1/go.mod h1:ylZWs9qCSL6KMJTknV9Yr92FiryKP6kpX+OcKRtJYq0=
 github.com/vinibgoulart/zius v0.1.2 h1:QpKLKVnjaC9dSS7hG+BucpkximMWSA8ysZT0viBVRgc=
 github.com/vinibgoulart/zius v0.1.2/go.mod h1:ylZWs9qCSL6KMJTknV9Yr92FiryKP6kpX+OcKRtJYq0=
 golang.org/x/sys v0.0.0-20181122145206-62eef0e2fa9b h1:MQE+LT/ABUuuvEZ+YQAMSXindAdUh7slEmAkup74op4=

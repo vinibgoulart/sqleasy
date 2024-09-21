@@ -2,23 +2,30 @@ package cli
 
 import (
 	"context"
-	"fmt"
 	"sync"
 
 	"github.com/vinibgoulart/sqleasy/helpers"
+	aiHandlers "github.com/vinibgoulart/sqleasy/packages/ai/handlers/cli"
 	databasesHandlers "github.com/vinibgoulart/sqleasy/packages/databases/handlers/cli"
+	"github.com/vinibgoulart/sqleasy/packages/server"
 )
 
+var state server.ServerState
+
 func Exec(ctx context.Context, waitGroup *sync.WaitGroup) {
-	defer waitGroup.Done()
-
 	logger := helpers.LoggerCreate("CLI Exec")
+	defer waitGroup.Done()
+	defer logger.Info("CLI finished")
 
-	databaseType := databasesHandlers.DatabaseConnectAsk()
-	if databaseType == nil {
-		logger.Error("Error on database connect")
+	errDatabaseConnect := databasesHandlers.DatabaseConnectAsk(&state)
+	if errDatabaseConnect != nil {
 		return
 	}
 
-	fmt.Println(databaseType)
+	for {
+		erroAiPrompt := aiHandlers.AiPromptAsk(&state)
+		if erroAiPrompt != nil {
+			break
+		}
+	}
 }

@@ -1,13 +1,17 @@
 package databases
 
 import (
+	"errors"
+
 	"github.com/manifoldco/promptui"
 	"github.com/vinibgoulart/sqleasy/helpers"
 	"github.com/vinibgoulart/sqleasy/packages/databases"
+	"github.com/vinibgoulart/sqleasy/packages/server"
 )
 
-func DatabaseConnectAsk() *databases.DatabaseConnect {
-	logger := helpers.LoggerCreate("DatabaseConnectAsk")
+func DatabaseConnectAsk(state *server.ServerState) error {
+	logger := helpers.LoggerCreate("Database Connect Ask")
+	defer logger.Info("Database connect")
 
 	promptDatabaseType := promptui.Select{
 		Label: "Select database type",
@@ -16,34 +20,37 @@ func DatabaseConnectAsk() *databases.DatabaseConnect {
 	_, databaseType, databaseTypeErr := promptDatabaseType.Run()
 	if databaseTypeErr != nil {
 		logger.Error(databaseTypeErr.Error())
-		return nil
+		return databaseTypeErr
 	}
 
 	promptDatabaseHost := promptui.Prompt{
-		Label: "Database host",
+		Label:   "Database host",
+		Default: "localhost",
 	}
 	databaseHost, databaseHostErr := promptDatabaseHost.Run()
 	if databaseHostErr != nil {
 		logger.Error(databaseHostErr.Error())
-		return nil
+		return databaseHostErr
 	}
 
 	promptDatabasePort := promptui.Prompt{
-		Label: "Database port",
+		Label:   "Database port",
+		Default: "5432",
 	}
 	databasePort, databasePortErr := promptDatabasePort.Run()
 	if databasePortErr != nil {
 		logger.Error(databasePortErr.Error())
-		return nil
+		return databasePortErr
 	}
 
 	promptDatabaseName := promptui.Prompt{
-		Label: "Database name",
+		Label:   "Database name",
+		Default: "postgres",
 	}
 	databaseName, databaseNameErr := promptDatabaseName.Run()
 	if databaseNameErr != nil {
 		logger.Error(databaseNameErr.Error())
-		return nil
+		return databaseNameErr
 	}
 
 	promptDatabasePassword := promptui.Prompt{
@@ -53,14 +60,37 @@ func DatabaseConnectAsk() *databases.DatabaseConnect {
 	databasePassword, databasePasswordErr := promptDatabasePassword.Run()
 	if databasePasswordErr != nil {
 		logger.Error(databasePasswordErr.Error())
-		return nil
+		return databasePasswordErr
 	}
 
-	return &databases.DatabaseConnect{
+	promptDatabaseUsername := promptui.Prompt{
+		Label:   "Database username",
+		Default: "postgres",
+	}
+	databaseUsername, databaseUsernameErr := promptDatabaseUsername.Run()
+	if databaseUsernameErr != nil {
+		logger.Error(databaseUsernameErr.Error())
+		return databaseUsernameErr
+	}
+
+	databaseConnect := databases.DatabaseConnect{
 		DatabaseType: databaseType,
 		Host:         databaseHost,
 		Port:         databasePort,
-		Username:     databaseName,
+		Username:     databaseUsername,
 		Password:     databasePassword,
+		Database:     databaseName,
 	}
+
+	db, errDatabaseConnect := databases.DatabaseConnectFn(&databaseConnect)
+
+	if errDatabaseConnect != nil {
+		logger.Error(errDatabaseConnect.Message)
+		return errors.New(errDatabaseConnect.Message)
+	}
+
+	state.Db = db
+	state.DatabaseConnect = &databaseConnect
+
+	return nil
 }

@@ -35,12 +35,6 @@ func ServerInit(ctx context.Context, waitGroup *sync.WaitGroup) {
 	})
 	router.Post("/database-connect", databasesHandlers.DatabaseConnectPost(&state))
 
-	router.Route("/database", func(r chi.Router) {
-		r.Use(DbContextMiddleware(&state))
-		r.Get("/info", databasesHandlers.DatabaseConnectInfoGet(&state))
-		r.Get("/describe", databasesHandlers.DatabaseConnectDescribeGet(&state))
-	})
-
 	router.Route("/ai", func(r chi.Router) {
 		r.Use(DbContextMiddleware(&state))
 		r.Post("/prompt", aiHandlers.AiPromptPost(&state))

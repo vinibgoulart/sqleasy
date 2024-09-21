@@ -14,7 +14,9 @@ import (
 )
 
 func AiPromptGpt(state server.ServerState, prompt string) (string, *helpers.Error) {
+	logger := helpers.LoggerCreate("AI Prompt GPT")
 	client := openai.NewClient(os.Getenv("OPEN_AI_KEY"))
+	debugMode := os.Getenv("DEBUG") == "true"
 
 	databaseDescribe, errDatabaseDescribe := databases.DatabaseDescribeFn(state.DatabaseConnect, state.Db)
 	if errDatabaseDescribe != nil {
@@ -46,6 +48,10 @@ func AiPromptGpt(state server.ServerState, prompt string) (string, *helpers.Erro
 	}
 
 	clientChatQuery := clientChatResponse.Choices[0].Message.Content
+
+	if debugMode {
+		logger.Debug(clientChatQuery)
+	}
 
 	rows, err := state.Db.Query(clientChatQuery)
 	if err != nil {

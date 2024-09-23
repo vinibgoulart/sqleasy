@@ -5,6 +5,7 @@ SQLEasy is a simple and easy way to interact with SQL databases without writing 
 ## Supported Databases
 
 - postgres
+- mssql (sql server)
 
 ## Requirements
 

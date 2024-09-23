@@ -27,9 +27,8 @@ func AiPromptGpt(state server.ServerState, prompt string) (string, *helpers.Erro
 	for _, ptr := range databaseDescribe {
 		values = append(values, *ptr)
 	}
-
 	fullPrompt := fmt.Sprintf(
-		"Database data: %v. Generate a SQL query to retrieve the data considering the following prompt: %s. Only respond with the SQL query. Use the following database type: %s. Only use tables and columns from the database describe.",
+		"Database data: %v. Generate a SQL query to retrieve the data considering the following prompt: %s. Only respond with the SQL query. Use the following database type: %s. Only use tables and columns from the database describe. Return in plain text, without mdx syntax.",
 		values,
 		prompt,
 		state.DatabaseConnect.DatabaseType,
@@ -38,7 +37,7 @@ func AiPromptGpt(state server.ServerState, prompt string) (string, *helpers.Erro
 	clientChatResponse, clientChatErr := client.CreateChatCompletion(
 		context.Background(),
 		openai.ChatCompletionRequest{
-			Model: openai.GPT3Dot5Turbo,
+			Model: openai.GPT4oMini20240718,
 			Messages: []openai.ChatCompletionMessage{
 				{
 					Role:    openai.ChatMessageRoleUser,
@@ -53,6 +52,11 @@ func AiPromptGpt(state server.ServerState, prompt string) (string, *helpers.Erro
 	}
 
 	clientChatQuery := clientChatResponse.Choices[0].Message.Content
+
+	if strings.Contains(clientChatQuery, "```sql") {
+		clientChatQuery = strings.Replace(clientChatQuery, "```sql", "", -1)
+		clientChatQuery = strings.Replace(clientChatQuery, "```", "", -1)
+	}
 
 	if debugMode {
 		logger.Debug(clientChatQuery)

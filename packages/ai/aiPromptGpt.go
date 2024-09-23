@@ -23,9 +23,14 @@ func AiPromptGpt(state server.ServerState, prompt string) (string, *helpers.Erro
 		return "", helpers.ErrorCreate(errDatabaseDescribe.Message)
 	}
 
+	var values []interface{}
+	for _, ptr := range databaseDescribe {
+		values = append(values, *ptr)
+	}
+
 	fullPrompt := fmt.Sprintf(
-		"Database data: %v. Generate a SQL query to retrieve the data considering the following prompt: %s. Only respond with the SQL query. Use the following database type: %s.",
-		databaseDescribe,
+		"Database data: %v. Generate a SQL query to retrieve the data considering the following prompt: %s. Only respond with the SQL query. Use the following database type: %s. Only use tables and columns from the database describe.",
+		values,
 		prompt,
 		state.DatabaseConnect.DatabaseType,
 	)

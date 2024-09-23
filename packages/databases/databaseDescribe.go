@@ -19,8 +19,8 @@ type DatabaseColumnProperties struct {
 }
 
 type DatabaseDescribed struct {
-	TableName    string                      `json:"tableName"`
-	TableColumns []*DatabaseColumnProperties `json:"tableColumns"`
+	TableName    string                     `json:"tableName"`
+	TableColumns []DatabaseColumnProperties `json:"tableColumns"`
 }
 
 var databaseDescribeFunctions = map[string]func(*sql.DB) ([]*DatabaseDescribed, *helpers.Error){
@@ -47,7 +47,7 @@ func databaseDescribePostgres(db *sql.DB) ([]*DatabaseDescribed, *helpers.Error)
 	}
 	defer rows.Close()
 
-	tableColumnsMap := make(map[string][]*DatabaseColumnProperties)
+	tableColumnsMap := make(map[string][]DatabaseColumnProperties)
 
 	tableNames := make(map[string]string)
 
@@ -59,7 +59,7 @@ func databaseDescribePostgres(db *sql.DB) ([]*DatabaseDescribed, *helpers.Error)
 
 		tableNames[tableName] = tableName
 
-		tableColumnsMap[tableName] = append(tableColumnsMap[tableName], &DatabaseColumnProperties{
+		tableColumnsMap[tableName] = append(tableColumnsMap[tableName], DatabaseColumnProperties{
 			ColumnName:     columnName,
 			ColumnDataType: dataType,
 		})
